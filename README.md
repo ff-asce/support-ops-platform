@@ -1,6 +1,18 @@
 # SupportOps Platform
 
-A full-stack internal call-center tooling dashboard demonstrating enterprise-grade architecture, API design, observability, and AI-assisted workflows.
+A production-ready, SE3-level microservices platform demonstrating enterprise-grade architecture, API design, observability, and AI-assisted workflows for customer service ticketing.
+
+[![CI/CD](https://github.com/ff-asce/support-ops-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/ff-asce/support-ops-platform/actions)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20+-green)](https://nodejs.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+## 📚 Documentation
+
+- **[Quick Start Guide](./QUICK_START.md)** - Get up and running in 5 minutes
+- **[API Documentation](./API_DOCUMENTATION.md)** - Complete API reference with examples
+- **[Implementation Guide](./IMPLEMENTATION_GUIDE.md)** - Technical implementation details
+- **[Project Status](./PROJECT_STATUS.md)** - Comprehensive project documentation
 
 ## Architecture
 
@@ -62,40 +74,20 @@ support-ops-platform/
 └── turbo.json                   # Turborepo configuration
 ```
 
-## Quick Start
+## 🚀 Quick Start
 
-### Prerequisites
+See the **[Quick Start Guide](./QUICK_START.md)** for detailed installation instructions.
 
-- Node.js 20+
-- MongoDB (local or Atlas)
-- Anthropic API key
-
-### Installation
-
+**TL;DR**:
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/support-ops-platform
+git clone https://github.com/ff-asce/support-ops-platform.git
 cd support-ops-platform
-
-# Install dependencies
 npm install
-
-# Set up environment variables
-cp .env.example .env
-# Edit .env with your MongoDB URI, JWT secret, and Anthropic API key
-
-# Start all services with Docker Compose (recommended)
-docker compose up
-
-# OR start services manually
-npm run dev --workspace=packages/ticket-service
-npm run dev --workspace=packages/ai-resolution-service
-npm run dev --workspace=packages/api-gateway
-npm run dev --workspace=apps/web
-
-# Seed the database with sample data
-npm run seed
+docker-compose up
+npm run seed --workspace=packages/ticket-service
 ```
+
+Access the GraphQL Playground at `http://localhost:3000/graphql`
 
 ### Access Points
 
