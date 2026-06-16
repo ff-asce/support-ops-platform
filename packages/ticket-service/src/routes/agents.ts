@@ -57,7 +57,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     logger.info({ agentId: agent.agentId, email }, "Agent created");
 
     // Return without password hash
-    const agentObj = agent.toObject();
+    const agentObj: any = agent.toObject();
     delete agentObj.passwordHash;
 
     res.status(201).json(agentObj);
