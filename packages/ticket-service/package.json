@@ -1,0 +1,41 @@
+{
+  "name": "@support-ops/ticket-service",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist",
+    "seed": "tsx src/scripts/seed.ts"
+  },
+  "dependencies": {
+    "@support-ops/shared": "*",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.0",
+    "pino": "^9.1.0",
+    "pino-pretty": "^11.1.0",
+    "dotenv": "^16.4.5",
+    "bcrypt": "^5.1.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.12",
+    "@types/bcrypt": "^5.0.2",
+    "@types/uuid": "^9.0.8",
+    "tsx": "^4.11.0",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0",
+    "mongodb-memory-server": "^9.3.0",
+    "supertest": "^7.0.0",
+    "@types/supertest": "^6.0.2",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
+    "@typescript-eslint/parser": "^7.11.0"
+  }
+}

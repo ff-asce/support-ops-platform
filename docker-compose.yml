@@ -1,0 +1,116 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: support-ops-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - support-ops-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ticket-service:
+    build:
+      context: .
+      dockerfile: packages/ticket-service/Dockerfile
+    container_name: support-ops-ticket-service
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - MONGODB_URI=mongodb://mongodb:27017/support-ops
+      - LOG_LEVEL=info
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - support-ops-network
+    volumes:
+      - ./packages/ticket-service:/app/packages/ticket-service
+      - /app/packages/ticket-service/node_modules
+      - ./packages/shared:/app/packages/shared
+      - /app/packages/shared/node_modules
+
+  ai-resolution-service:
+    build:
+      context: .
+      dockerfile: packages/ai-resolution-service/Dockerfile
+    container_name: support-ops-ai-service
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=development
+      - PORT=3002
+      - MONGODB_URI=mongodb://mongodb:27017/support-ops
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - LOG_LEVEL=info
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - support-ops-network
+    volumes:
+      - ./packages/ai-resolution-service:/app/packages/ai-resolution-service
+      - /app/packages/ai-resolution-service/node_modules
+      - ./packages/shared:/app/packages/shared
+      - /app/packages/shared/node_modules
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: packages/api-gateway/Dockerfile
+    container_name: support-ops-api-gateway
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - TICKET_SERVICE_URL=http://ticket-service:3001
+      - AI_SERVICE_URL=http://ai-resolution-service:3002
+      - JWT_SECRET=${JWT_SECRET:-your-secret-key-change-in-production}
+      - LOG_LEVEL=info
+    depends_on:
+      - ticket-service
+      - ai-resolution-service
+    networks:
+      - support-ops-network
+    volumes:
+      - ./packages/api-gateway:/app/packages/api-gateway
+      - /app/packages/api-gateway/node_modules
+      - ./packages/shared:/app/packages/shared
+      - /app/packages/shared/node_modules
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    container_name: support-ops-web
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:3000/graphql
+      - VITE_WS_URL=ws://localhost:3000/graphql
+    depends_on:
+      - api-gateway
+    networks:
+      - support-ops-network
+    volumes:
+      - ./apps/web:/app/apps/web
+      - /app/apps/web/node_modules
+
+networks:
+  support-ops-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+
+# Made with Bob
