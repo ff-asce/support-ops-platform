@@ -69,10 +69,10 @@ services:
       dockerfile: packages/api-gateway/Dockerfile
     container_name: support-ops-api-gateway
     ports:
-      - "3000:3000"
+      - "4000:4000"
     environment:
       - NODE_ENV=development
-      - PORT=3000
+      - PORT=4000
       - TICKET_SERVICE_URL=http://ticket-service:3001
       - AI_SERVICE_URL=http://ai-resolution-service:3002
       - JWT_SECRET=${JWT_SECRET:-your-secret-key-change-in-production}
@@ -96,8 +96,8 @@ services:
     ports:
       - "5173:5173"
     environment:
-      - VITE_API_URL=http://localhost:3000/graphql
-      - VITE_WS_URL=ws://localhost:3000/graphql
+      - VITE_API_URL=http://localhost:4000/graphql
+      - VITE_WS_URL=ws://localhost:4000/graphql
     depends_on:
       - api-gateway
     networks:
