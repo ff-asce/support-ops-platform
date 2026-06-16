@@ -3,7 +3,7 @@ import { Query } from './Query';
 import { Mutation } from './Mutation';
 import { Subscription } from './Subscription';
 import { Context } from './Query';
-import { Ticket, Agent } from '@support-ops/shared';
+import { Agent } from '@support-ops/shared';
 
 // Custom DateTime scalar
 const dateTimeScalar = new GraphQLScalarType({

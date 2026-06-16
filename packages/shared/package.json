@@ -7,7 +7,8 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "clean": "rm -rf dist",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "echo 'No tests for shared package'"
   },
   "dependencies": {
     "zod": "^3.23.8"

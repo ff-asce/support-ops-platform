@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from "express";
-import { AISuggestionRequestSchema, AISuggestionResponseSchema, ErrorCodes, AppError } from "@support-ops/shared";
+import { AISuggestionRequestSchema, AISuggestionResponseSchema } from "@support-ops/shared";
 import { AISuggestionCacheModel } from "../models/AISuggestionCache";
 import { anthropic, isAnthropicAvailable } from "../utils/anthropic";
 import { buildResolutionPrompt } from "../prompts/resolution";

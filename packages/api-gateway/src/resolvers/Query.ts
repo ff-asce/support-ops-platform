@@ -35,7 +35,6 @@ export const Query = {
     context: Context
   ) => {
     const { tickets, total } = await context.ticketService.listTickets(args);
-    const limit = args.limit || 50;
     const offset = args.offset || 0;
     
     return {
