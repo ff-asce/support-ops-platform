@@ -7,4 +7,3 @@ export * from "./schemas";
 // Errors
 export * from "./errors";
 
-// Made with Bob

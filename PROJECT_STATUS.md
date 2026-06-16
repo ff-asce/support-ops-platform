@@ -374,4 +374,3 @@ This project is for educational and demonstration purposes.
 
 Built with ❤️ by Bob (AI Assistant)
 
-**Made with Bob**

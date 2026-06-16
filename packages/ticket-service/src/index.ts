@@ -82,4 +82,3 @@ process.on("SIGINT", async () => {
 // Start the server
 start();
 
-// Made with Bob

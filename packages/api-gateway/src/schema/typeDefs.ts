@@ -233,4 +233,3 @@ export const typeDefs = gql`
   }
 `;
 
-// Made with Bob

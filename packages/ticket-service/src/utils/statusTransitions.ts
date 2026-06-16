@@ -42,4 +42,3 @@ export function canTransitionTo(
   return VALID_TRANSITIONS[currentStatus].includes(newStatus);
 }
 
-// Made with Bob

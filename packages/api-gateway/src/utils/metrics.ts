@@ -69,4 +69,3 @@ export const dataloaderCacheMisses = new Counter({
 // Export the registry for /metrics endpoint
 export { register };
 
-// Made with Bob

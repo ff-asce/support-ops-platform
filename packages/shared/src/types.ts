@@ -66,4 +66,3 @@ export interface AuthPayload {
   agent: Agent;
 }
 
-// Made with Bob

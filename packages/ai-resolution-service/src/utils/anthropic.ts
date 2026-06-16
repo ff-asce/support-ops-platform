@@ -17,4 +17,3 @@ export function isAnthropicAvailable(): boolean {
   return anthropic !== null;
 }
 
-// Made with Bob

@@ -35,4 +35,3 @@ export const AISuggestionCacheModel = mongoose.model<AISuggestionCacheDocument>(
   AISuggestionCacheSchema
 );
 
-// Made with Bob

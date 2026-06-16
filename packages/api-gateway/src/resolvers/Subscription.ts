@@ -35,4 +35,3 @@ export const Subscription = {
   },
 };
 
-// Made with Bob

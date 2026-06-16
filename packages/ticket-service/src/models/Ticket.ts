@@ -83,4 +83,3 @@ TicketSchema.pre("save", async function (next) {
 
 export const TicketModel = mongoose.model<TicketDocument>("Ticket", TicketSchema);
 
-// Made with Bob

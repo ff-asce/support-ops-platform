@@ -24,4 +24,3 @@ export const logger = pino({
   },
 });
 
-// Made with Bob

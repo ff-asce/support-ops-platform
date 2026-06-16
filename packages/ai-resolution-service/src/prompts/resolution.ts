@@ -32,4 +32,3 @@ Remember:
 Respond with ONLY the JSON object, no additional text.`;
 }
 
-// Made with Bob

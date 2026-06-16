@@ -68,4 +68,3 @@ export const resolvers = {
   Resolution,
 };
 
-// Made with Bob

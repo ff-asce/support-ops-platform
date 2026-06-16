@@ -96,4 +96,3 @@ export function mockLogin(email: string, password: string): AuthUser | null {
   return null;
 }
 
-// Made with Bob

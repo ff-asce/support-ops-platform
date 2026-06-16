@@ -98,4 +98,3 @@ export const Query = {
   },
 };
 
-// Made with Bob

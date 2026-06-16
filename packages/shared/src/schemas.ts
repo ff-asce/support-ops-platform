@@ -73,4 +73,3 @@ export type LoginInput = z.infer<typeof LoginSchema>;
 export type TicketFilter = z.infer<typeof TicketFilterSchema>;
 export type PaginationInput = z.infer<typeof PaginationSchema>;
 
-// Made with Bob

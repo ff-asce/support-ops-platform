@@ -32,4 +32,3 @@ export function getDatabaseStatus(): string {
   return states[state] || "unknown";
 }
 
-// Made with Bob

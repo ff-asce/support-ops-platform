@@ -130,4 +130,3 @@ export class TicketServiceClient {
   }
 }
 
-// Made with Bob

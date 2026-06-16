@@ -42,4 +42,3 @@ export class AIServiceClient {
   }
 }
 
-// Made with Bob
