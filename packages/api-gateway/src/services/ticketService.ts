@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { Ticket, Agent, CreateTicketInput, UpdateTicketInput, ResolveTicketInput } from '@support-ops/shared';
+import { Ticket, Agent, CreateTicketInput, ResolveTicketInput } from '@support-ops/shared';
 
 export class TicketServiceClient {
   private client: AxiosInstance;
@@ -46,7 +46,7 @@ export class TicketServiceClient {
     return response.data;
   }
 
-  async updateTicket(id: string, input: UpdateTicketInput): Promise<Ticket> {
+  async updateTicket(id: string, input: Partial<CreateTicketInput>): Promise<Ticket> {
     const response = await this.client.patch<Ticket>(`/tickets/${id}`, input);
     return response.data;
   }

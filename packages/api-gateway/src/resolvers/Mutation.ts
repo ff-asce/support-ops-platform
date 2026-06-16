@@ -16,18 +16,24 @@ export const Mutation = {
       input,
     }: {
       input: {
-        title: string;
+        subject: string;
         description: string;
         priority: string;
         category: string;
         customerId: string;
-        customerEmail: string;
         tags?: string[];
       };
     },
     context: Context
   ) => {
-    const ticket = await context.ticketService.createTicket(input);
+    const ticket = await context.ticketService.createTicket({
+      subject: input.subject,
+      description: input.description,
+      priority: input.priority as any,
+      category: input.category as any,
+      customerId: input.customerId,
+      tags: input.tags || [],
+    });
     
     // Publish to subscription
     pubsub.publish(TICKET_CREATED, { ticketCreated: ticket });
@@ -43,7 +49,7 @@ export const Mutation = {
     }: {
       id: string;
       input: {
-        title?: string;
+        subject?: string;
         description?: string;
         priority?: string;
         category?: string;
@@ -52,7 +58,7 @@ export const Mutation = {
     },
     context: Context
   ) => {
-    const ticket = await context.ticketService.updateTicket(id, input);
+    const ticket = await context.ticketService.updateTicket(id, input as any);
     
     // Publish to subscription
     pubsub.publish(TICKET_UPDATED, { ticketUpdated: ticket });
@@ -140,7 +146,9 @@ export const Mutation = {
       });
     }
 
-    const ticket = await context.ticketService.resolveTicket(id, input);
+    const ticket = await context.ticketService.resolveTicket(id, {
+      resolution: input.resolutionNotes,
+    });
     
     // Publish to subscriptions
     pubsub.publish(TICKET_UPDATED, { ticketUpdated: ticket });

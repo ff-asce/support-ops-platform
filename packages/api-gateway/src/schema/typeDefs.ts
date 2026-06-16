@@ -74,13 +74,12 @@ export const typeDefs = gql`
   type Ticket {
     id: ID!
     ticketId: String!
-    title: String!
+    subject: String!
     description: String!
     status: TicketStatus!
     priority: TicketPriority!
     category: String!
     customerId: String!
-    customerEmail: String!
     assignedTo: Agent
     tags: [String!]!
     resolution: Resolution
@@ -194,18 +193,17 @@ export const typeDefs = gql`
 
   """Input for creating a ticket"""
   input CreateTicketInput {
-    title: String!
+    subject: String!
     description: String!
     priority: TicketPriority!
     category: String!
     customerId: String!
-    customerEmail: String!
     tags: [String!]
   }
 
   """Input for updating a ticket"""
   input UpdateTicketInput {
-    title: String
+    subject: String
     description: String
     priority: TicketPriority
     category: String

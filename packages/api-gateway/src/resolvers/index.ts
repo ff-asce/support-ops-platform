@@ -27,13 +27,13 @@ const dateTimeScalar = new GraphQLScalarType({
 });
 
 // Field resolvers for Ticket type
-const Ticket = {
-  assignedTo: async (parent: Ticket, _: any, context: Context) => {
-    if (!parent.assignedTo) {
+const TicketResolvers = {
+  assignedTo: async (parent: any, _: any, context: Context) => {
+    if (!parent.assignedAgentId) {
       return null;
     }
     // Use DataLoader to batch agent queries
-    return context.dataloaders.agentLoader.load(parent.assignedTo);
+    return context.dataloaders.agentLoader.load(parent.assignedAgentId);
   },
 };
 
@@ -63,7 +63,7 @@ export const resolvers = {
   Query,
   Mutation,
   Subscription,
-  Ticket,
+  Ticket: TicketResolvers,
   Agent,
   Resolution,
 };

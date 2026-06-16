@@ -4,8 +4,8 @@ import { pubsub, TICKET_UPDATED, TICKET_CREATED, TICKET_STATUS_CHANGED } from '.
 export const Subscription = {
   ticketUpdated: {
     subscribe: withFilter(
-      () => pubsub.asyncIterator([TICKET_UPDATED]),
-      (payload, variables) => {
+      () => (pubsub as any).asyncIterator([TICKET_UPDATED]),
+      (payload: any, variables: any) => {
         // If ticketId is provided, only send updates for that ticket
         if (variables.ticketId) {
           return payload.ticketUpdated._id === variables.ticketId;
@@ -17,13 +17,13 @@ export const Subscription = {
   },
 
   ticketCreated: {
-    subscribe: () => pubsub.asyncIterator([TICKET_CREATED]),
+    subscribe: () => (pubsub as any).asyncIterator([TICKET_CREATED]),
   },
 
   ticketStatusChanged: {
     subscribe: withFilter(
-      () => pubsub.asyncIterator([TICKET_STATUS_CHANGED]),
-      (payload, variables) => {
+      () => (pubsub as any).asyncIterator([TICKET_STATUS_CHANGED]),
+      (payload: any, variables: any) => {
         // If ticketId is provided, only send status changes for that ticket
         if (variables.ticketId) {
           return payload.ticketStatusChanged.ticketId === variables.ticketId;

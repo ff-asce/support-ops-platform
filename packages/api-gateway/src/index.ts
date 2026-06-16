@@ -80,7 +80,7 @@ async function startServer() {
   // Create Apollo Server
   const server = new ApolloServer({
     schema,
-    context: ({ req }) => {
+    context: ({ req }: any) => {
       const auth = createAuthContext(req);
       return {
         ticketService,
@@ -108,7 +108,7 @@ async function startServer() {
           let operationType = 'unknown';
 
           return {
-            async didResolveOperation(requestContext) {
+            async didResolveOperation(requestContext: any) {
               operationName = requestContext.operationName || 'anonymous';
               operationType = requestContext.operation?.operation || 'unknown';
             },
@@ -119,9 +119,9 @@ async function startServer() {
                 .observe(duration);
               graphqlOperationCount.labels(operationName, operationType).inc();
             },
-            async didEncounterErrors(requestContext) {
+            async didEncounterErrors(requestContext: any) {
               const errors = requestContext.errors || [];
-              errors.forEach((error) => {
+              errors.forEach((error: any) => {
                 const errorType = error.extensions?.code || 'UNKNOWN';
                 graphqlOperationErrors
                   .labels(operationName, operationType, errorType as string)
@@ -132,14 +132,14 @@ async function startServer() {
         },
       },
     ],
-    formatError: (error) => {
+    formatError: (error: any) => {
       logger.error({ error: error.message, stack: error.stack }, 'GraphQL error');
       return error;
     },
   });
 
   await server.start();
-  server.applyMiddleware({ app, path: '/graphql' });
+  server.applyMiddleware({ app: app as any, path: '/graphql' });
 
   // Health check endpoint
   app.get('/health', async (req, res) => {
